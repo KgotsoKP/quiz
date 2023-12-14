@@ -5,10 +5,16 @@
             <div class="status">1 out of 3 questions</div>
         </div>
 
-        <div class="single-question" v-for="question in questions" :key="question.q">
+        <p @click="sendDataToParent">Test Question</p>
+
+        <div class="single-question" v-for="(question, qi) in questions" :key="question.q"
+            v-show="questionsAnswered === qi">
             <div class="question">{{ question.q }}</div>
-            <div class="answers" v-for="answer in question.answers" :key="answer.text">
-                <div class="answer">{{ answer.text }}</div>
+            <div class="answers">
+                <div class="answer" v-for="answer in question.answers" :key="answer.text"
+                    @click.prevent="selectAnswer(answer.is_correct)">
+                    {{ answer.text }}
+                </div>
             </div>
         </div>
     </div>
@@ -16,7 +22,18 @@
 
 <script>
 export default {
-    props: ['questions']
+    props: ['questions', 'questionsAnswered'],
+    emits: ['question-answered','test'],
+    methods: {
+        selectAnswer(is_correct) {
+            this.$emit("question-answered", is_correct);
+            //console.log(this.$emit("question-answered", is_correct));
+        },
+        sendDataToParent() {
+            console.log("hi")
+      this.$emit('button-clicked', 'Button was clicked!');
+    },
+    }
 }
 
 </script>

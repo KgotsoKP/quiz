@@ -1,6 +1,12 @@
 <template>
   <div class="ctr">
-    <app-questions v-if="questionsAnswered < questions.length" :questions="questions" />
+    <app-questions
+      v-if="questionsAnswered < questions.length"
+      :questions="questions"
+      :questionsAnswered="questionsAnswered"
+      @question-answered="questionsAnswered2"
+      @button-clicked="handleButtonClick"
+      />
     <app-result v-else />
     <button type="button" class="reset-btn">Reset</button>
   </div>
@@ -19,6 +25,7 @@ export default {
   data() {
     return {
       questionsAnswered: 0,
+      totalCorrect : 0,
       questions: [
         {
           q: 'What is 2 + 2?',
@@ -94,9 +101,21 @@ export default {
           desc: "Studying has definitely paid off for you!"
         }
       ]
-
     }
-  }
+  },
+  methods: {
+    questionsAnswered2(is_correct) {
+        console.log("From Home")
+      if (is_correct) {
+        this.totalCorrect++
+      }
+
+      this.questionsAnswered++
+    },
+    handleButtonClick(data) {
+      alert(data)
+    },
+    }
 
 }
 </script>
