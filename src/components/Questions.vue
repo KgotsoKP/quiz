@@ -1,8 +1,8 @@
 <template>
     <div class="questions-ctr">
         <div class="progress">
-            <div class="bar"></div>
-            <div class="status">1 out of 3 questions</div>
+            <div class="bar" :style="{ width: `${(questionsAnswered / questions.length) * 100}%` }"></div>
+            <div class="status">{{ questionsAnswered }} out of {{ questions.length }} questions answerd</div>
         </div>
 
         <p @click="sendDataToParent">Test Question</p>
@@ -29,10 +29,6 @@ export default {
             this.$emit("question-answered", is_correct);
             //console.log(this.$emit("question-answered", is_correct));
         },
-        sendDataToParent() {
-            console.log("hi")
-      this.$emit('button-clicked', 'Button was clicked!');
-    },
     }
 }
 

@@ -5,7 +5,6 @@
       :questions="questions"
       :questionsAnswered="questionsAnswered"
       @question-answered="questionsAnswered2"
-      @button-clicked="handleButtonClick"
       />
     <app-result v-else />
     <button type="button" class="reset-btn">Reset</button>
@@ -111,9 +110,6 @@ export default {
       }
 
       this.questionsAnswered++
-    },
-    handleButtonClick(data) {
-      alert(data)
     },
     }
 
