@@ -14,7 +14,7 @@ export default {
         resultIndex() {
             let index = 0;
 
-            this.results.results.forEach(element, i => {
+            this.results.forEach((element, i) => {
                 if (element.min <= this.totalCorrect && element.max >= this.totalCorrect) {
                     index = i;
                 }
